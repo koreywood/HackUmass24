@@ -1,9 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <%- require('partials/head') %>
-</head>
-<body>
-    <%= recipe %>
-</body>
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body>
+    <% console.log(recipe) %>
+    <h1 class="text-decoration-underline my-4 mx-2"><%=recipe.title %></h1>
+    <div class="d-flex flex-row-reverse mx-2">
+      <img
+        src="<%= recipe.image %>"
+        alt="<%= recipe.title %>"
+        class="img-fluid flex-1"
+      />
+      <div class="flex-1">
+        <h3>Ingredients</h3>
+        <div class="d-flex m-2 flex-wrap">
+          <% recipe.extendedIngredients.forEach((ingredient) => { %>
+          <div class="p-2 m-2 flex-fill border">
+            <h4><%= ingredient.name %></h4>
+            <p><%= ingredient.amount %> <%= ingredient.unit %></p>
+          </div>
+          <% }) %>
+        </div>
+        <div>
+          <h2>Summary</h2>
+          <%- recipe.summary %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-2">
+      <h2>Instructions</h2>
+      <% if (recipe.analyzedInstructions[0].steps.length > 1) { %> 
+        <% recipe.analyzedInstructions[0].steps.forEach((step) => { %>
+            <div class="m-2 p-2 border">
+                <h3>Step <%= step.number %></h3>
+                <p><%= step.step %></p>
+            </div>
+        <% }) %> 
+      <% } else { %>
+        <%- recipe.instructions %>
+    <% } %>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
 </html>
