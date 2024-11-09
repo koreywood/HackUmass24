@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <%- include('partials/head') %>
-</head>
-<body>
+  </head>
+  <body>
     <div class="m-2">
-    <header>
+      <header>
         <h1>ingredient List</h1>
-    </header>
-    <main>
+      </header>
+      <main>
         <% if (ingredients.length === 0) { %>
-            <h2>No ingredients added</h2>
+        <h2>No ingredients added</h2>
         <% } else { %>
         <div class="d-flex flex-wrap">
-            <% ingredients.forEach((ingredient) => { %>
-                <h2 class="flex-fill m-2 p-3 border"><%= ingredient %></h2>
-            <% }); %>
+          <% ingredients.forEach((ingredient) => { %>
+          <h2 class="flex-fill m-2 p-3 border"><%= ingredient %></h2>
+          <% }); %>
         </div>
-    <h1>Recipes</h1>
+        <h1>Recipes</h1>
         <ul class="d-flex flex-wrap">
-            <% recipes.forEach((recipe) => { %>
-                <li class="m-3 p-3 flex-fill">
-                    <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover fs-2" href="/recipe/<%= recipe.id %>"><%= recipe.title %></a>
-                    <p><%= recipe.description %></p>
-                    <h3>Missing Ingredients</h3>
-                    <ul class="text-body">
-                        <% recipe.usedIngredients.forEach((ingredient) => {  %>
-                            <li class="bg-success m-2 ps-2"><%= ingredient.name %></li>
-                        <% }) %>
-                        <% recipe.missedIngredients.forEach((ingredient) => {  %>
-                            <li class="bg-danger m-2"><%= ingredient.name %></li>
-                        <% }) %>
-                    </ul>
-                </li>
-            <% }) %>
+          <% recipes.forEach((recipe) => { %>
+          <li class="m-3 p-3 flex-fill">
+            <a
+              class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover fs-2"
+              href="/recipe/<%= recipe.id %>"
+              ><%= recipe.title %></a
+            >
+            <p><%= recipe.description %></p>
+            <h3>Missing Ingredients</h3>
+            <ul class="text-body">
+              <% recipe.usedIngredients.forEach((ingredient) => { %>
+              <li class="bg-success m-2 ps-2"><%= ingredient.name %></li>
+              <% }) %> <% recipe.missedIngredients.forEach((ingredient) => { %>
+              <li class="bg-danger m-2"><%= ingredient.name %></li>
+              <% }) %>
+            </ul>
+          </li>
+          <% }) %>
         </ul>
         <% } %>
-    </main>
-</div>
-<%- include('partials/footer') %>
-</body>
+      </main>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
 </html>
