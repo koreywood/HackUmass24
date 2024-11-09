@@ -1,10 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const ejs = require('ejs');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
 app.set('view engine', 'ejs');
 const ingredients = [];
 
@@ -90,6 +88,6 @@ app.get('*', (req, res) => {
     res.send('404 Page Not Found');
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
