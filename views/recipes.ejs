@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <header>
+        <h1>Recipe List</h1>
+    </header>
+    <main>
+        <ul>
+            <% recipes.forEach((recipe) => { %>
+                <li>
+                    <h2><%= recipe.title %></h2>
+                    <p><%= recipe.description %></p>
+                    <h3>Missing Ingredients</h3>
+                    <ul>
+                        <% recipe.missedIngredients.forEach((ingredient) => {  %>
+                            <li class="bg-danger m-2"><%= ingredient.name %></li>
+                        <% }) %>
+                    </ul>
+                </li>
+            <% }) %>
+        </ul>
+    </main>
+</body>
+</html>
