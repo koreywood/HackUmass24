@@ -60,18 +60,18 @@ app.get('/addItems', async (req, res) => {
 
 app.get('/recipes', async (req, res) => {
     if (ingredients.length === 0) {
-        res.send('No ingredients added');
+        res.render('recipes', { recipes: [], ingredients: [] });
         return;
     }
     console.log(ingredients.reduce((acc, curr) => acc + ',' + curr));
-    const recipes = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.API_KEY}&ingredients=${ingredients.reduce((acc, curr) => acc + ',' + curr)}`)
+    const recipes = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.API_KEY}&ingredients=${ingredients.reduce((acc, curr) => acc + ',' + curr)}&ranking=2`)
         .then((response) => response.json())
         .then((data) => data)
         .catch((err) => {
             console.error('Failed to fetch recipes', err);
         });
     console.log(recipes);
-    res.render('recipes', { recipes: recipes });
+    res.render('recipes', { recipes: recipes, ingredients: ingredients });
 
 });
 app.get('/recipe/:id', async (req, res) => {
