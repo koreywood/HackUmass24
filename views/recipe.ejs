@@ -3,8 +3,15 @@
   <head>
     <%- include('partials/head') %>
   </head>
+  <script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+  socket.on('refresh', () => {
+    console.log('refreshing');
+    location.reload();
+  });
+</script>
   <body>
-    <% console.log(recipe) %>
     <h1 class="text-decoration-underline my-4 mx-2"><%=recipe.title %></h1>
     <div class="d-flex flex-row-reverse mx-2">
       <img
